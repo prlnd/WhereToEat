@@ -3,9 +3,9 @@ package com.example.wheretoeat.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "rest_table")
+@Entity(tableName = "restaurant_table")
 data class Restaurant(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val address: String,
     val city: String,
