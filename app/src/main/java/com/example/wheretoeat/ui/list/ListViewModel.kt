@@ -13,10 +13,10 @@ import retrofit2.Response
 class ListViewModel(private val repository: RestaurantApiRepository) : ViewModel() {
     private val _responseRestaurantsByCity = MutableLiveData<Response<RestaurantsByCity>>()
 
-    val responseRestaurantsByCity: LiveData<Response<RestaurantsByCity>>
+    val responseRestaurantsByCity: MutableLiveData<Response<RestaurantsByCity>>
         get() = _responseRestaurantsByCity
 
-    suspend fun getRestaurantsByCity(city: String) {
+    fun getRestaurantsByCity(city: String) {
         viewModelScope.launch {
             val response = repository.getRestaurantsByCity(city)
             _responseRestaurantsByCity.value = response
