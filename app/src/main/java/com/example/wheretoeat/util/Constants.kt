@@ -1,4 +1,4 @@
-package com.example.wheretoeat
+package com.example.wheretoeat.util
 
 class Constants {
     companion object {

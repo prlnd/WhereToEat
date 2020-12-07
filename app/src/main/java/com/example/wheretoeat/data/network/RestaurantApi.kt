@@ -1,21 +1,13 @@
-package com.example.wheretoeat.network
+package com.example.wheretoeat.data.network
 
-import com.example.wheretoeat.Constants.Companion.BASE_URL
 import com.example.wheretoeat.model.CityList
 import com.example.wheretoeat.model.CountryList
 import com.example.wheretoeat.model.RestaurantList
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(GsonConverterFactory.create())
-    .baseUrl(BASE_URL)
-    .build()
-
-interface RestaurantApiService {
+interface RestaurantApi {
     @GET("api/restaurants")
     suspend fun getRestaurants(
         @QueryMap queries: Map<String, String>
@@ -28,8 +20,8 @@ interface RestaurantApiService {
     suspend fun getCountries(): Response<CountryList>
 }
 
-object RestaurantApi {
-    val retrofitService: RestaurantApiService by lazy {
-        retrofit.create(RestaurantApiService::class.java)
-    }
-}
+//object Api {
+//    val api: RestaurantApi by lazy {
+//        retrofit.create(RestaurantApi::class.java)
+//    }
+//}
