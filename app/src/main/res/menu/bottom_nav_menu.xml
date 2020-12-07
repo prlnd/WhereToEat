@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_list"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:title="@string/title_list" />
+        android:id="@+id/restaurantsFragment"
+        android:icon="@drawable/ic_restaurant"
+        android:title="@string/restaurants_fragment" />
 
     <item
-        android:id="@+id/menu_add"
-        android:icon="@android:drawable/btn_star"
-        android:title="@string/title_favorite" />
+        android:id="@+id/favoriteRestaurantsFragment"
+        android:icon="@drawable/ic_star"
+        android:title="@string/favorite_restaurants_fragment" />
 
     <item
-        android:id="@+id/menu_user"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="@string/title_user" />
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_account"
+        android:title="@string/profile_fragment" />
 
 </menu>

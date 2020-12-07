@@ -1,4 +1,4 @@
-package com.example.wheretoeat.data
+package com.example.wheretoeat.data.list
 
 import android.content.Context
 import androidx.room.Database

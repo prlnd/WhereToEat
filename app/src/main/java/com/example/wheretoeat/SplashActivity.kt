@@ -4,12 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.lifecycle.ViewModelProvider
-import com.example.wheretoeat.data.RestaurantRepository
-import com.example.wheretoeat.network.RestaurantApiRepository
-import com.example.wheretoeat.ui.list.ListViewModel
-import com.example.wheretoeat.ui.list.ListViewModelFactory
+import com.example.wheretoeat.ui.MainActivity
+import com.example.wheretoeat.ui.prev.list.ListViewModel
 
+@Suppress("DEPRECATION")
 class SplashActivity : AppCompatActivity() {
     private lateinit var viewModel: ListViewModel
 

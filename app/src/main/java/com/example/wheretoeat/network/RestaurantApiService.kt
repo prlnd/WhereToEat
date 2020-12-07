@@ -1,15 +1,14 @@
 package com.example.wheretoeat.network
 
+import com.example.wheretoeat.Constants.Companion.BASE_URL
 import com.example.wheretoeat.model.CityList
 import com.example.wheretoeat.model.CountryList
-import com.example.wheretoeat.model.RestaurantsByCity
+import com.example.wheretoeat.model.RestaurantList
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
-
-private const val BASE_URL = "https://opentable.herokuapp.com/"
+import retrofit2.http.QueryMap
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
@@ -18,9 +17,9 @@ private val retrofit = Retrofit.Builder()
 
 interface RestaurantApiService {
     @GET("api/restaurants")
-    suspend fun getRestaurantsByCity(
-        @Query("city") city: String
-    ): Response<RestaurantsByCity>
+    suspend fun getRestaurants(
+        @QueryMap queries: Map<String, String>
+    ): Response<RestaurantList>
 
     @GET("api/cities")
     suspend fun getCities(): Response<CityList>

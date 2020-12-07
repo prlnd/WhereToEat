@@ -1,4 +1,4 @@
-package com.example.wheretoeat.ui.list
+package com.example.wheretoeat.ui.prev.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

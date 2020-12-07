@@ -1,4 +1,4 @@
-package com.example.wheretoeat.ui.favorite
+package com.example.wheretoeat.ui.prev.favorite
 
 import androidx.fragment.app.Fragment
 

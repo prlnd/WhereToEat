@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/menu_list"
-        android:name="com.example.wheretoeat.ui.list.ListFragment"
+        android:name="com.example.wheretoeat.ui.prev.list.ListFragment"
         android:label="List"
         tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/menu_add"
-        android:name="com.example.wheretoeat.ui.favorite.FavoriteFragment"
+        android:name="com.example.wheretoeat.ui.prev.favorite.FavoriteFragment"
         android:label="Add"
         tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/menu_user"
-        android:name="com.example.wheretoeat.ui.user.UserFragment"
+        android:name="com.example.wheretoeat.ui.prev.user.UserFragment"
         android:label="Family"
         tools:layout="@layout/fragment_favorite" />
 </navigation>

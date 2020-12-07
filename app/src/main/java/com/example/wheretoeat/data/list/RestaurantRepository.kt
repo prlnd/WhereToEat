@@ -1,4 +1,4 @@
-package com.example.wheretoeat.data
+package com.example.wheretoeat.data.list
 
 import androidx.lifecycle.LiveData
 import com.example.wheretoeat.model.Restaurant
