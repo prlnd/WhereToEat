@@ -5,7 +5,7 @@ class Constants {
         const val BASE_URL = "https://opentable.herokuapp.com/"
         const val USER_ID = 1234
 
-        // Queries
+        // API Queries
         const val QUERY_PRICE = "price"
         const val QUERY_NAME = "name"
         const val QUERY_ADDRESS = "address"
@@ -15,5 +15,9 @@ class Constants {
         const val QUERY_COUNTRY = "country"
         const val QUERY_PAGE = "page"
         const val QUERY_PER_PAGE = "per_page"
+
+        // ROOM Database
+        const val DATABASE_NAME = "restaurants_database"
+        const val RESTAURANTS_TABLE = "restaurants_table"
     }
 }

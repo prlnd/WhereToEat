@@ -44,16 +44,8 @@ class RestaurantsFragment : Fragment() {
         return mView
     }
 
-    fun applyQueries(): HashMap<String, String> {
-        val queries = HashMap<String, String>()
-
-        queries[Constants.QUERY_CITY] = "Chicago"
-
-        return queries
-    }
-
     private fun requestApiData() {
-        mainViewModel.getRestaurants(applyQueries())
+        mainViewModel.getRestaurants(restaurantsViewModel.applyQueries())
         mainViewModel.restaurantsResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is NetworkResult.Success -> {

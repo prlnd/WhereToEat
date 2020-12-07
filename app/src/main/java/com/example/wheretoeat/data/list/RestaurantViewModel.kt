@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.wheretoeat.data.database.RestaurantDatabase
 import com.example.wheretoeat.model.Restaurant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

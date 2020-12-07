@@ -12,8 +12,6 @@ class RestaurantsViewModel(application: Application) : AndroidViewModel(applicat
         val queries = HashMap<String, String>()
 
         queries[QUERY_CITY] = "Chicago"
-        queries[QUERY_PER_PAGE] = "100"
-        queries[QUERY_PAGE] = "1"
 
         return queries
     }

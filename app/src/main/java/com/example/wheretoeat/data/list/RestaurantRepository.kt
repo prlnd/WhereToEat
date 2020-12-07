@@ -1,6 +1,7 @@
 package com.example.wheretoeat.data.list
 
 import androidx.lifecycle.LiveData
+import com.example.wheretoeat.data.database.RestaurantDao
 import com.example.wheretoeat.model.Restaurant
 
 class RestaurantRepository(private val restaurantDao: RestaurantDao) {

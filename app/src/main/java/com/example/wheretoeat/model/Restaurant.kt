@@ -4,9 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "restaurant_table")
 data class Restaurant(
-    @PrimaryKey(autoGenerate = true)
+    @SerializedName("id")
     val id: Int,
     @SerializedName("name")
     val name: String,
