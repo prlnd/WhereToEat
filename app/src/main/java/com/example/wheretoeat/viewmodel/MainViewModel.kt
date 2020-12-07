@@ -1,9 +1,10 @@
-package com.example.wheretoeat
+package com.example.wheretoeat.viewmodel
 
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -21,9 +22,10 @@ class MainViewModel @ViewModelInject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
+    // injecting our repository here
     var restaurantsResponse: MutableLiveData<NetworkResult<RestaurantList>> = MutableLiveData()
 
-    fun getRestaurantList(queries: Map<String, String>) = viewModelScope.launch {
+    fun getRestaurants(queries: Map<String, String>) = viewModelScope.launch {
         getRestaurantsSafeCall(queries)
     }
 
@@ -34,7 +36,7 @@ class MainViewModel @ViewModelInject constructor(
                 val response = repository.remote.getRestaurants(queries)
                 restaurantsResponse.value = handleRestaurantListResponse(response)
             } catch (e: Exception) {
-
+                restaurantsResponse.value = NetworkResult.Error("Restaurants not found.")
             }
         } else {
             restaurantsResponse.value = NetworkResult.Error("No Internet Connection.")
@@ -51,6 +53,7 @@ class MainViewModel @ViewModelInject constructor(
             }
             response.isSuccessful -> {
                 val restaurantList = response.body()
+                Log.d("RestaurantList", restaurantList.toString())
                 return NetworkResult.Success(restaurantList!!)
             }
             else -> {

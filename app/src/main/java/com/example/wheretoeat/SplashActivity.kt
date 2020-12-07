@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.wheretoeat.ui.MainActivity
-import com.example.wheretoeat.ui.prev.list.ListViewModel
 
 @Suppress("DEPRECATION")
 class SplashActivity : AppCompatActivity() {
-    private lateinit var viewModel: ListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,134 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/restaurantsRowLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/row_cardView"
-        android:layout_width="0dp"
+    <data>
+
+        <variable
+            name="restaurant"
+            type="com.example.wheretoeat.model.Restaurant" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/restaurantsRowLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/light_medium_gray"
-        app:strokeWidth="1dp">
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/row_cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/light_medium_gray"
+            app:strokeWidth="1dp">
 
-            <ImageView
-                android:id="@+id/restaurant_imageView"
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
-            <TextView
-                android:id="@+id/title_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/courgette"
-                android:maxLines="2"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                android:textAlignment="center"
-                android:textColor="@color/darker"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/restaurant_imageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/restaurant_imageView"
+                    android:layout_width="200dp"
+                    android:layout_height="0dp"
+                    loadImageFromUrl="@{restaurant.imageUrl}"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-            <ImageView
-                android:id="@+id/city_imageView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/city_textView"
-                app:layout_constraintStart_toEndOf="@+id/restaurant_imageView"
-                app:layout_constraintTop_toTopOf="@+id/city_textView"
-                app:srcCompat="@drawable/ic_house"
-                app:tint="@color/green" />
+                <TextView
+                    android:id="@+id/title_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/courgette"
+                    android:maxLines="2"
+                    android:text="@{restaurant.name}"
+                    android:textAlignment="center"
+                    android:textColor="@color/darker"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/restaurant_imageView"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/city_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="12dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                android:textColor="@color/green"
-                app:layout_constraintEnd_toEndOf="@+id/title_textView"
-                app:layout_constraintStart_toEndOf="@+id/city_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/title_textView" />
+                <ImageView
+                    android:id="@+id/city_imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/city_textView"
+                    app:layout_constraintStart_toEndOf="@+id/restaurant_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/city_textView"
+                    app:srcCompat="@drawable/ic_globe" />
 
-            <ImageView
-                android:id="@+id/address_imageView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:tint="@color/red"
-                app:layout_constraintBottom_toBottomOf="@+id/address_textView"
-                app:layout_constraintStart_toStartOf="@+id/city_imageView"
-                app:layout_constraintTop_toTopOf="@+id/address_textView"
-                app:srcCompat="@drawable/ic_location" />
+                <TextView
+                    android:id="@+id/city_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="12dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{restaurant.city}"
+                    app:layout_constraintEnd_toEndOf="@+id/title_textView"
+                    app:layout_constraintStart_toEndOf="@+id/city_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 
-            <TextView
-                android:id="@+id/address_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                android:textColor="@color/red"
-                app:layout_constraintEnd_toEndOf="@+id/city_textView"
-                app:layout_constraintStart_toStartOf="@+id/city_textView"
-                app:layout_constraintTop_toBottomOf="@+id/city_textView" />
-            />
+                <ImageView
+                    android:id="@+id/address_imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/address_textView"
+                    app:layout_constraintStart_toStartOf="@+id/city_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/address_textView"
+                    app:srcCompat="@drawable/ic_location" />
 
-            <ImageView
-                android:id="@+id/price_imageView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:tint="@color/yellow"
-                app:layout_constraintBottom_toBottomOf="@+id/price_textView"
-                app:layout_constraintStart_toStartOf="@+id/address_imageView"
-                app:layout_constraintTop_toTopOf="@+id/price_textView"
-                app:srcCompat="@drawable/ic_money" />
+                <TextView
+                    android:id="@+id/address_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{restaurant.address}"
+                    app:layout_constraintEnd_toEndOf="@+id/city_textView"
+                    app:layout_constraintStart_toStartOf="@+id/city_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/city_textView" />
 
-            <TextView
-                android:id="@+id/price_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="12dp"
-                android:text="0"
-                android:textColor="@color/yellow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/address_textView"
-                app:layout_constraintStart_toStartOf="@+id/address_textView"
-                app:layout_constraintTop_toBottomOf="@+id/address_textView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/price_imageView"
+                    setPrice="@{restaurant.price}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/price_textView"
+                    app:layout_constraintStart_toStartOf="@+id/address_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/price_textView"
+                    app:srcCompat="@drawable/ic_money" />
 
-    </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/price_textView"
+                    setPrice="@{restaurant.price}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:textColor="@color/yellow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/address_textView"
+                    app:layout_constraintStart_toStartOf="@+id/address_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/address_textView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
