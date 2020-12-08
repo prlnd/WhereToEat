@@ -13,11 +13,13 @@ import com.example.wheretoeat.R
 class RestaurantsRowBinding {
     // to be able to access functions inside from outside
     companion object {
+
         @BindingAdapter("loadImageFromUrl")
         @JvmStatic
         fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
             Glide.with(imageView.context)
                 .load(imageUrl)
+                .error(R.drawable.ic_error_placeholder)
                 .transition(
                     DrawableTransitionOptions()
                         .crossFade(400)

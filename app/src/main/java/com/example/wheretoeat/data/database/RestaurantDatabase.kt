@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.wheretoeat.model.Restaurant
+import com.example.wheretoeat.util.Constants.Companion.DATABASE_NAME
 
 @Database(
-    entities = [Restaurant::class],
+    entities = [RestaurantEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -18,6 +19,7 @@ abstract class RestaurantDatabase: RoomDatabase() {
     abstract fun restaurantDao(): RestaurantDao
 
     companion object {
+
         @Volatile
         private var INSTANCE: RestaurantDatabase? = null
 
@@ -30,7 +32,7 @@ abstract class RestaurantDatabase: RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     RestaurantDatabase::class.java,
-                    "restaurant_database"
+                    DATABASE_NAME
                 ).build()
                 INSTANCE = instance
                 return instance

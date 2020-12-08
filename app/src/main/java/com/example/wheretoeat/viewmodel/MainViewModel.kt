@@ -4,14 +4,13 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.wheretoeat.data.Repository
+import com.example.wheretoeat.data.database.RestaurantEntity
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.NetworkResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
@@ -22,8 +21,19 @@ class MainViewModel @ViewModelInject constructor(
     application: Application
 ) : AndroidViewModel(application) {
 
+    /** ROOM DATABASE */
+
+    val readRestaurants: LiveData<List<RestaurantEntity>> =
+        repository.local.readDatabase().asLiveData()
+
+    private fun insertRestaurants(restaurantEntity: RestaurantEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertRestaurants(restaurantEntity)
+        }
+
+    /** RETROFIT */
     // injecting our repository here
-    var restaurantsResponse: MutableLiveData<NetworkResult<RestaurantList>> = MutableLiveData()
+    var restaurantsResponse = MutableLiveData<NetworkResult<RestaurantList>>()
 
     fun getRestaurants(queries: Map<String, String>) = viewModelScope.launch {
         getRestaurantsSafeCall(queries)
@@ -35,6 +45,11 @@ class MainViewModel @ViewModelInject constructor(
             try {
                 val response = repository.remote.getRestaurants(queries)
                 restaurantsResponse.value = handleRestaurantListResponse(response)
+
+                val restaurantList = restaurantsResponse.value!!.data
+                if (restaurantList != null) {
+                    offlineCacheRestaurants(restaurantList)
+                }
             } catch (e: Exception) {
                 restaurantsResponse.value = NetworkResult.Error("Restaurants not found.")
             }
@@ -43,21 +58,25 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
-    private fun handleRestaurantListResponse(response: Response<RestaurantList>): NetworkResult<RestaurantList>? {
-        when {
+    private fun offlineCacheRestaurants(restaurantList: RestaurantList) {
+        val restaurantEntity = RestaurantEntity(restaurantList)
+        insertRestaurants(restaurantEntity)
+    }
+
+    private fun handleRestaurantListResponse(response: Response<RestaurantList>): NetworkResult<RestaurantList> {
+        return when {
             response.message().toString().contains("timeout") -> {
-                return NetworkResult.Error("Timeout")
+                NetworkResult.Error("Timeout")
             }
             response.body()!!.restaurants.isNullOrEmpty() -> {
-                return NetworkResult.Error("Restaurants not found.")
+                NetworkResult.Error("Restaurants not found.")
             }
             response.isSuccessful -> {
                 val restaurantList = response.body()
-                Log.d("RestaurantList", restaurantList.toString())
-                return NetworkResult.Success(restaurantList!!)
+                NetworkResult.Success(restaurantList!!)
             }
             else -> {
-                return NetworkResult.Error(response.message())
+                NetworkResult.Error(response.message())
             }
         }
     }

@@ -7,6 +7,6 @@ import com.example.wheretoeat.util.Constants.Companion.RESTAURANTS_TABLE
 
 @Entity(tableName = RESTAURANTS_TABLE)
 class RestaurantEntity(var restaurantList: RestaurantList) {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     var id = 0
 }

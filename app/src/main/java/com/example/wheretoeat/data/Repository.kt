@@ -3,9 +3,12 @@ package com.example.wheretoeat.data
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
-@ActivityRetainedScoped // the instance survives a configuration change (ex. rotating the screen)
+// the instance survives a configuration change (ex. rotating the screen)
+@ActivityRetainedScoped
 class Repository @Inject constructor(
-    remoteDataSource: RemoteDataSource
+    remoteDataSource: RemoteDataSource,
+    localDataSource: LocalDataSource
 ) {
     val remote = remoteDataSource
+    val local = localDataSource
 }
