@@ -7,6 +7,7 @@ import android.net.NetworkCapabilities
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.wheretoeat.data.Repository
+import com.example.wheretoeat.model.QueryParameters
 import com.example.wheretoeat.data.database.RestaurantEntity
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.NetworkResult
@@ -35,11 +36,11 @@ class MainViewModel @ViewModelInject constructor(
     // injecting our repository here
     var restaurantsResponse = MutableLiveData<NetworkResult<RestaurantList>>()
 
-    fun getRestaurants(queries: Map<String, String>) = viewModelScope.launch {
+    fun getRestaurants(queries: QueryParameters) = viewModelScope.launch {
         getRestaurantsSafeCall(queries)
     }
 
-    private suspend fun getRestaurantsSafeCall(queries: Map<String, String>) {
+    private suspend fun getRestaurantsSafeCall(queries: QueryParameters) {
         restaurantsResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
             try {

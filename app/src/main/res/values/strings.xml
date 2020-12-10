@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">WhereToEat</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_list">List</string>
+    <string name="title_user">User</string>
+    <string name="text_name">Name</string>
+    <string name="text_price">Price</string>
+    <string name="textview_splash">Splash Placeholder</string>
+    <string name="text_address">Address</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="text_detail_name">Name</string>
+    <string name="text_detail_address">Address</string>
+    <string name="text_detail_number">Phone Number</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="restaurants_fragment">Restaurants</string>
+    <string name="favorite_restaurants_fragment">Favorites</string>
+    <string name="profile_fragment">Profile</string>
+    <string name="city">City</string>
+    <string name="price">Price</string>
+    <string name="apply">Apply</string>
+
+    <string-array name="planets">
+        <item>X</item>
+        <item>djfldskjaflksdjfkljsdkalfj;kldsja</item>
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
+</resources>

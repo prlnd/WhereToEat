@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.wheretoeat.R
 
@@ -19,6 +20,7 @@ class RestaurantsRowBinding {
         fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
             Glide.with(imageView.context)
                 .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.ic_error_placeholder)
                 .transition(
                     DrawableTransitionOptions()
@@ -42,8 +44,8 @@ class RestaurantsRowBinding {
             when (view) {
                 is TextView -> {
                     view.apply {
-                        text = price.toString()
-                        setTextColor(color)
+                        text = "$".repeat(price)
+//                        setTextColor(color)
                     }
                 }
                 is ImageView -> view.setColorFilter(color)

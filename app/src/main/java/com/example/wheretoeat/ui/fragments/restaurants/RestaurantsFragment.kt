@@ -1,4 +1,4 @@
-package com.example.wheretoeat.ui.fragments
+package com.example.wheretoeat.ui.fragments.restaurants
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wheretoeat.R
 import com.example.wheretoeat.viewmodel.MainViewModel
@@ -23,6 +25,8 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RestaurantsFragment : Fragment() {
+    private val args by navArgs<RestaurantsFragmentArgs>()
+
     private var _binding: FragmentRestaurantsBinding? = null
     private val binding get() = _binding!!
 
@@ -49,6 +53,10 @@ class RestaurantsFragment : Fragment() {
         setupRecyclerView()
         readDatabase()
 
+        binding.restaurantsFab.setOnClickListener {
+            findNavController().navigate(R.id.action_restaurantsFragment_to_restaurantsBottomSheet)
+        }
+
         return binding.root
     }
 
@@ -61,7 +69,7 @@ class RestaurantsFragment : Fragment() {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRestaurants.observeOnce(viewLifecycleOwner, { database ->
-                if (database.isNotEmpty()) {
+                if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("RestaurantFragment", "requestApiData called!")
                     mAdapter.setData(database[0].restaurantList)
                     hideShimmerEffect()

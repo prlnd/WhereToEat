@@ -5,6 +5,12 @@ class Constants {
         const val BASE_URL = "https://opentable.herokuapp.com/"
         const val USER_ID = 1234
 
+        // Default values
+        const val DEFAULT_CITY = "Dallas"
+        const val DEFAULT_PRICE = 2
+        const val DEFAULT_PAGE = 1
+        const val DEFAULT_PER_PAGE = 100
+
         // API Queries
         const val QUERY_PRICE = "price"
         const val QUERY_NAME = "name"
@@ -19,5 +25,8 @@ class Constants {
         // ROOM Database
         const val DATABASE_NAME = "restaurants_database"
         const val RESTAURANTS_TABLE = "restaurants_table"
+
+        const val PREFERENCE_NAME = "restaurantPreferences"
+        const val PREFERENCE_PRICE_CATEGORY = "priceCategory"
     }
 }

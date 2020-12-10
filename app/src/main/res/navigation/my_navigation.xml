@@ -7,9 +7,17 @@
 
     <fragment
         android:id="@+id/restaurantsFragment"
-        android:name="com.example.wheretoeat.ui.fragments.RestaurantsFragment"
+        android:name="com.example.wheretoeat.ui.fragments.restaurants.RestaurantsFragment"
         android:label="Restaurants"
-        tools:layout="@layout/fragment_restaurants" />
+        tools:layout="@layout/fragment_restaurants">
+        <action
+            android:id="@+id/action_restaurantsFragment_to_restaurantsBottomSheet"
+            app:destination="@id/restaurantsBottomSheet" />
+        <argument
+            android:name="backFromBottomSheet"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteRestaurantsFragment"
         android:name="com.example.wheretoeat.ui.fragments.FavoriteRestaurantsFragment"
@@ -20,4 +28,13 @@
         android:name="com.example.wheretoeat.ui.fragments.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <dialog
+        android:id="@+id/restaurantsBottomSheet"
+        android:name="com.example.wheretoeat.ui.fragments.restaurants.RestaurantsBottomSheet"
+        android:label="restaurants_bottom_sheet"
+        tools:layout="@layout/restaurants_bottom_sheet">
+        <action
+            android:id="@+id/action_restaurantsBottomSheet_to_restaurantsFragment"
+            app:destination="@id/restaurantsFragment" />
+    </dialog>
 </navigation>

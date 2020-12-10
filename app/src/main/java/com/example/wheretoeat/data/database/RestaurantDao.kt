@@ -10,6 +10,6 @@ interface RestaurantDao {
     suspend fun insertRestaurant(restaurantEntity: RestaurantEntity)
 
     // Flow is similar to LiveData
-    @Query("SELECT * FROM restaurants_table ORDER BY id ASC")
+    @Query("SELECT * FROM restaurants_table ORDER BY restaurantList ASC")
     fun readRestaurant(): Flow<List<RestaurantEntity>>
 }
