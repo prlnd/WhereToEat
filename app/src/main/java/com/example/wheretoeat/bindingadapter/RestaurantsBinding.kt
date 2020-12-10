@@ -21,7 +21,7 @@ class RestaurantsBinding {
         ) {
             if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                 imageView.visibility = View.VISIBLE
-            } else if (apiResponse is NetworkResult.Loading|| apiResponse is NetworkResult.Success) {
+            } else if (apiResponse is NetworkResult.Loading || apiResponse is NetworkResult.Success) {
                 imageView.visibility = View.INVISIBLE
             }
         }
@@ -36,7 +36,7 @@ class RestaurantsBinding {
             if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                 textView.visibility = View.VISIBLE
                 textView.text = apiResponse.message.toString()
-            } else if (apiResponse is NetworkResult.Loading|| apiResponse is NetworkResult.Success) {
+            } else if (apiResponse is NetworkResult.Loading || apiResponse is NetworkResult.Success) {
                 textView.visibility = View.INVISIBLE
             }
         }

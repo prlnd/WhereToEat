@@ -24,8 +24,8 @@
     <string name="apply">Apply</string>
 
     <string-array name="planets">
-        <item>X</item>
-        <item>djfldskjaflksdjfkljsdkalfj;kldsja</item>
+        <item>Chicago</item>
+        <item>Dallas</item>
         <item>Mercury</item>
         <item>Venus</item>
         <item>Earth</item>

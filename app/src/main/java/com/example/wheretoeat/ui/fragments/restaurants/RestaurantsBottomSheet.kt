@@ -46,9 +46,7 @@ class RestaurantsBottomSheet : BottomSheetDialogFragment() {
         }
 
         mView.apply_button.setOnClickListener {
-            restaurantsViewModel.savePriceCategory(
-                priceCategoryChip
-            )
+            restaurantsViewModel.savePriceCategory(priceCategoryChip)
             val action =
                 RestaurantsBottomSheetDirections.actionRestaurantsBottomSheetToRestaurantsFragment(
                     true

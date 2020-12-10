@@ -6,7 +6,7 @@ class Constants {
         const val USER_ID = 1234
 
         // Default values
-        const val DEFAULT_CITY = "Dallas"
+        const val DEFAULT_CITY = "Chicago"
         const val DEFAULT_PRICE = 2
         const val DEFAULT_PAGE = 1
         const val DEFAULT_PER_PAGE = 100
@@ -26,7 +26,9 @@ class Constants {
         const val DATABASE_NAME = "restaurants_database"
         const val RESTAURANTS_TABLE = "restaurants_table"
 
+        // Bottom Sheet Preferences
         const val PREFERENCE_NAME = "restaurantPreferences"
-        const val PREFERENCE_PRICE_CATEGORY = "priceCategory"
+        const val PREFERENCE_PRICE_CATEGORY_ID = "priceCategoryId"
+        const val PREFERENCE_BACK_ONLINE = "backOnline"
     }
 }

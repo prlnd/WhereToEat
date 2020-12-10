@@ -16,11 +16,13 @@ import com.example.wheretoeat.R
 import com.example.wheretoeat.viewmodel.MainViewModel
 import com.example.wheretoeat.adapter.RestaurantsAdapter
 import com.example.wheretoeat.databinding.FragmentRestaurantsBinding
+import com.example.wheretoeat.util.NetworkListener
 import com.example.wheretoeat.util.NetworkResult
 import com.example.wheretoeat.util.observeOnce
 import com.example.wheretoeat.viewmodel.RestaurantsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_restaurants.view.*
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -33,6 +35,8 @@ class RestaurantsFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var restaurantsViewModel: RestaurantsViewModel
     private val mAdapter by lazy { RestaurantsAdapter() }
+
+    private lateinit var networkListener: NetworkListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +55,28 @@ class RestaurantsFragment : Fragment() {
         binding.mainViewModel = mainViewModel
 
         setupRecyclerView()
-        readDatabase()
+
+        restaurantsViewModel.readBackOnline.observe(viewLifecycleOwner, {
+            restaurantsViewModel.backOnline = it
+        })
+
+        lifecycleScope.launch {
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect { status ->
+                    Log.d("NetworkListener", status.toString())
+                    restaurantsViewModel.networkStatus = status
+                    restaurantsViewModel.showNetworkStatus()
+                    readDatabase()
+                }
+        }
 
         binding.restaurantsFab.setOnClickListener {
-            findNavController().navigate(R.id.action_restaurantsFragment_to_restaurantsBottomSheet)
+            if (restaurantsViewModel.networkStatus) {
+                findNavController().navigate(R.id.action_restaurantsFragment_to_restaurantsBottomSheet)
+            } else {
+                restaurantsViewModel.showNetworkStatus()
+            }
         }
 
         return binding.root
