@@ -17,15 +17,18 @@
             android:name="backFromBottomSheet"
             android:defaultValue="false"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_restaurantsFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
     <fragment
         android:id="@+id/favoriteRestaurantsFragment"
-        android:name="com.example.wheretoeat.ui.fragments.FavoriteRestaurantsFragment"
-        android:label="Favorite Restaurants"
+        android:name="com.example.wheretoeat.ui.fragments.favorites.FavoriteRestaurantsFragment"
+        android:label="Favorites"
         tools:layout="@layout/fragment_favorite_restaurants" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.wheretoeat.ui.fragments.ProfileFragment"
+        android:name="com.example.wheretoeat.ui.fragments.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <dialog
@@ -37,4 +40,13 @@
             android:id="@+id/action_restaurantsBottomSheet_to_restaurantsFragment"
             app:destination="@id/restaurantsFragment" />
     </dialog>
+    <activity
+        android:id="@+id/detailsActivity"
+        android:name="com.example.wheretoeat.ui.DetailsActivity"
+        android:label="Details"
+        tools:layout="@layout/activity_details" >
+        <argument
+            android:name="restaurant"
+            app:argType="com.example.wheretoeat.model.Restaurant" />
+    </activity>
 </navigation>

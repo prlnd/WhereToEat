@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -6,20 +5,19 @@
     <data>
 
         <variable
-            name="restaurant"
-            type="com.example.wheretoeat.model.Restaurant" />
+            name="favoritesEntity"
+            type="com.example.wheretoeat.data.database.entities.FavoritesEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/restaurantsRowLayout"
-        onRestaurantClickListener="@{restaurant}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/row_cardView"
+            android:id="@+id/favorite_row_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
@@ -37,27 +35,26 @@
                 android:background="@color/white">
 
                 <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/card_guideline"
+                    android:id="@+id/favorite_card_guideline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.47" />
 
-                <!--loadImageFromUrl="@{restaurant.imageUrl}"-->
                 <ImageView
-                    android:id="@+id/restaurant_imageView"
+                    android:id="@+id/favorite_restaurant_imageView"
+                    loadImageFromUrl="@{favoritesEntity.restaurant.imageUrl}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/foodimage"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/card_guideline"
+                    app:layout_constraintEnd_toStartOf="@+id/favorite_card_guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/title_textView"
+                    android:id="@+id/favorite_title_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -65,27 +62,27 @@
                     android:layout_marginEnd="12dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="@{restaurant.name}"
+                    android:text="@{favoritesEntity.restaurant.name}"
                     android:textAlignment="center"
                     android:textColor="@color/darker"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/restaurant_imageView"
+                    app:layout_constraintStart_toEndOf="@+id/favorite_restaurant_imageView"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/address_imageView"
+                    android:id="@+id/favorite_address_imageView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/address_linearLayout"
-                    app:layout_constraintStart_toEndOf="@+id/restaurant_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/address_linearLayout"
+                    app:layout_constraintBottom_toBottomOf="@+id/favorite_address_linearLayout"
+                    app:layout_constraintStart_toEndOf="@+id/favorite_restaurant_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/favorite_address_linearLayout"
                     app:srcCompat="@drawable/ic_location" />
 
                 <LinearLayout
-                    android:id="@+id/address_linearLayout"
+                    android:id="@+id/favorite_address_linearLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
@@ -93,57 +90,57 @@
                     android:layout_marginEnd="12dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/address_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/title_textView">
+                    app:layout_constraintStart_toEndOf="@+id/favorite_address_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/favorite_title_textView">
 
                     <TextView
-                        android:id="@+id/address_textView"
+                        android:id="@+id/favorite_address_textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@{restaurant.address}" />
+                        android:text="@{favoritesEntity.restaurant.address}" />
 
                     <TextView
-                        android:id="@+id/city_textView"
+                        android:id="@+id/favorite_city_textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@{restaurant.city + `, ` + restaurant.country}" />
+                        android:text="@{favoritesEntity.restaurant.city + `, ` + favoritesEntity.restaurant.country}" />
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/price_imageView"
-                    setPrice="@{restaurant.price}"
+                    android:id="@+id/favorite_price_imageView"
+                    setPrice="@{favoritesEntity.restaurant.price}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/price_textView"
-                    app:layout_constraintStart_toStartOf="@+id/address_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/price_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/favorite_price_textView"
+                    app:layout_constraintStart_toStartOf="@+id/favorite_address_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/favorite_price_textView"
                     app:srcCompat="@drawable/ic_money" />
 
                 <TextView
-                    android:id="@+id/price_textView"
-                    setPrice="@{restaurant.price}"
+                    android:id="@+id/favorite_price_textView"
+                    setPrice="@{favoritesEntity.restaurant.price}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
-                    app:layout_constraintStart_toStartOf="@+id/address_linearLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/address_linearLayout" />
+                    app:layout_constraintEnd_toStartOf="@+id/favorite_imageView"
+                    app:layout_constraintStart_toStartOf="@+id/favorite_address_linearLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/favorite_address_linearLayout" />
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/favorite_imageView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/price_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/favorite_price_imageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/price_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/favorite_price_imageView"
                     app:srcCompat="@drawable/ic_star" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

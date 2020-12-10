@@ -1,4 +1,4 @@
-package com.example.wheretoeat.data.database
+package com.example.wheretoeat.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

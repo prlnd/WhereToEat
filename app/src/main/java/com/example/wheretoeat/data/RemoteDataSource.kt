@@ -14,4 +14,6 @@ class RemoteDataSource @Inject constructor(
             page = queries.page,
             per_page = queries.per_page
         )
+
+    suspend fun getCities() = restaurantApi.getCities()
 }

@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.wheretoeat.data.database.RestaurantEntity
+import com.example.wheretoeat.data.database.entities.RestaurantEntity
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.NetworkResult
 

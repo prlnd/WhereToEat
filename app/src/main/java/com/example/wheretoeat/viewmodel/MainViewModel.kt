@@ -7,8 +7,9 @@ import android.net.NetworkCapabilities
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.wheretoeat.data.Repository
+import com.example.wheretoeat.data.database.entities.FavoritesEntity
 import com.example.wheretoeat.model.QueryParameters
-import com.example.wheretoeat.data.database.RestaurantEntity
+import com.example.wheretoeat.data.database.entities.RestaurantEntity
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.NetworkResult
 import kotlinx.coroutines.Dispatchers
@@ -24,21 +25,43 @@ class MainViewModel @ViewModelInject constructor(
 
     /** ROOM DATABASE */
 
-    val readRestaurants: LiveData<List<RestaurantEntity>> =
-        repository.local.readDatabase().asLiveData()
+    val readRestaurants = repository.local.readRestaurants().asLiveData()
+    val readFavoriteRestaurants = repository.local.readFavoriteRestaurants().asLiveData()
 
     private fun insertRestaurants(restaurantEntity: RestaurantEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertRestaurants(restaurantEntity)
         }
 
+    fun insertFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertFavoriteRestaurant(favoritesEntity)
+        }
+
+    private fun deleteFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteFavoriteRestaurant(favoritesEntity)
+        }
+
+    private fun deleteAllFavoriteRestaurants() =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.deleteAllFavoriteRestaurants()
+        }
+
     /** RETROFIT */
+
     // injecting our repository here
     var restaurantsResponse = MutableLiveData<NetworkResult<RestaurantList>>()
+    // TODO(city list)
+//    var citiesResponse = MutableLiveData<NetworkResult<CityList>>()
 
     fun getRestaurants(queries: QueryParameters) = viewModelScope.launch {
         getRestaurantsSafeCall(queries)
     }
+
+//    fun getCities() = viewModelScope.launch {
+//        getCitiesSafeCall()
+//    }
 
     private suspend fun getRestaurantsSafeCall(queries: QueryParameters) {
         restaurantsResponse.value = NetworkResult.Loading()
@@ -59,11 +82,32 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
+//    private suspend fun getCitiesSafeCall() {
+//        citiesResponse.value = NetworkResult.Loading()
+//        if (hasInternetConnection()) {
+//            try {
+//                val response = repository.remote.getRestaurants(queries)
+//                restaurantsResponse.value = handleRestaurantListResponse(response)
+//
+//                val cityList = citiesResponse.value!!.data
+//            } catch (e: Exception) {
+//                citiesResponse.value = NetworkResult.Error("Restaurants not found.")
+//            }
+//        } else {
+//            citiesResponse.value = NetworkResult.Error("No Internet Connection.")
+//        }
+//    }
+
     private fun offlineCacheRestaurants(restaurantList: RestaurantList) {
         val restaurantEntity = RestaurantEntity(restaurantList)
         insertRestaurants(restaurantEntity)
     }
 
+    /**
+     *
+     * @param response Response<RestaurantList>
+     * @return NetworkResult<RestaurantList>
+     */
     private fun handleRestaurantListResponse(response: Response<RestaurantList>): NetworkResult<RestaurantList> {
         return when {
             response.message().toString().contains("timeout") -> {
@@ -82,6 +126,10 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
+    /**
+     *
+     * @return Boolean
+     */
     private fun hasInternetConnection(): Boolean {
         val connectivityManager = getApplication<Application>().getSystemService(
             Context.CONNECTIVITY_SERVICE

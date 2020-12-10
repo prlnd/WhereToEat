@@ -1,4 +1,4 @@
-package com.example.wheretoeat.ui.fragments
+package com.example.wheretoeat.ui.fragments.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

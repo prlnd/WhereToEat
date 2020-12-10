@@ -25,6 +25,8 @@ class Constants {
         // ROOM Database
         const val DATABASE_NAME = "restaurants_database"
         const val RESTAURANTS_TABLE = "restaurants_table"
+        const val CITIES_TABLE = "cities_table"
+        const val FAVORITES_TABLE = "favorites_table"
 
         // Bottom Sheet Preferences
         const val PREFERENCE_NAME = "restaurantPreferences"

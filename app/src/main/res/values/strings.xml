@@ -22,6 +22,9 @@
     <string name="city">City</string>
     <string name="price">Price</string>
     <string name="apply">Apply</string>
+    <string name="search">Search</string>
+    <string name="save_to_favorites">Save to Favorites</string>
+    <string name="no_favorite_recipes">No Favorite Recipes.</string>
 
     <string-array name="planets">
         <item>Chicago</item>

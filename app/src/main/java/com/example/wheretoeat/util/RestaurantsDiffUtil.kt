@@ -4,9 +4,9 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.wheretoeat.model.Restaurant
 
 // compares the old list with the new data
-class RestaurantsDiffUtil(
-    private val oldList: List<Restaurant>,
-    private val newList: List<Restaurant>
+class RestaurantsDiffUtil<T>(
+    private val oldList: List<T>,
+    private val newList: List<T>
 ): DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
 

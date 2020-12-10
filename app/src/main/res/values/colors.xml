@@ -10,7 +10,7 @@
 
     <!-- Custom Colors -->
     <color name="color_primary">#6200EA</color>
-    <color name="color_primaryDark">#5502C8</color>
+    <color name="color_primary_dark">#5502C8</color>
     <color name="color_accent">#9D46FF</color>
 
     <color name="light_gray">#F9F9F9</color>
@@ -29,4 +29,6 @@
     <color name="chipBackgroundColor">@color/light_gray</color>
     <color name="checkedChipTextColor">@color/color_primary</color>
     <color name="chipTextColor">@color/dark_gray</color>
+
+    <color name="actionBarBackgroundColor">@color/color_primary</color>
 </resources>

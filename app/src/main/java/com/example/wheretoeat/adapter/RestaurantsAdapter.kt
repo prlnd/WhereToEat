@@ -43,7 +43,7 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.MyViewHolder>
     fun setData(newData: RestaurantList) {
         val restaurantsDiffUtil = RestaurantsDiffUtil(restaurants, newData.restaurants)
         val diffUtilResult = DiffUtil.calculateDiff(restaurantsDiffUtil)
-        restaurants = newData.restaurants
+        restaurants = newData.restaurants.sortedBy { it.name }
         diffUtilResult.dispatchUpdatesTo(this)
     }
 }

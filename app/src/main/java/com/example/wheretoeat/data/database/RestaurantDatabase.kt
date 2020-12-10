@@ -1,15 +1,13 @@
 package com.example.wheretoeat.data.database
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.wheretoeat.model.Restaurant
-import com.example.wheretoeat.util.Constants.Companion.DATABASE_NAME
+import com.example.wheretoeat.data.database.entities.FavoritesEntity
+import com.example.wheretoeat.data.database.entities.RestaurantEntity
 
 @Database(
-    entities = [RestaurantEntity::class],
+    entities = [RestaurantEntity::class, FavoritesEntity::class],
     version = 1,
     exportSchema = false
 )
