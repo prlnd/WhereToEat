@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -33,6 +34,7 @@ class RestaurantsRowBinding {
                         RestaurantsFragmentDirections.actionRestaurantsFragmentToDetailsActivity(
                             restaurant
                         )
+                    restaurantRowLayout.findNavController().navigate(action)
                 } catch (e: Exception) {
                     Log.d("onRestaurantClickListener", e.message.toString())
                 }

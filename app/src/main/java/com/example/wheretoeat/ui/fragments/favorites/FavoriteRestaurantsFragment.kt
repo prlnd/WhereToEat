@@ -36,10 +36,6 @@ class FavoriteRestaurantsFragment : Fragment() {
 
         setupRecyclerView(binding.favoritesRecyclerView)
 
-        mainViewModel.readFavoriteRestaurants.observe(viewLifecycleOwner, { favoritesEntity ->
-            mAdapter.setData(favoritesEntity)
-        })
-
         return binding.root
     }
 

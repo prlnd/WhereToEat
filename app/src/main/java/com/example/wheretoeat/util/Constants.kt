@@ -2,11 +2,12 @@ package com.example.wheretoeat.util
 
 class Constants {
     companion object {
-        const val BASE_URL = "https://opentable.herokuapp.com/"
+//        const val BASE_URL = "https://opentable.herokuapp.com/api"
+        const val BASE_URL = "https://ratpark-api.imok.space"
         const val USER_ID = 1234
 
         // Default values
-        const val DEFAULT_CITY = "Chicago"
+        const val DEFAULT_CITY = "Dallas"
         const val DEFAULT_PRICE = 2
         const val DEFAULT_PAGE = 1
         const val DEFAULT_PER_PAGE = 100
@@ -30,6 +31,7 @@ class Constants {
 
         // Bottom Sheet Preferences
         const val PREFERENCE_NAME = "restaurantPreferences"
+        const val PREFERENCE_PRICE_CATEGORY = "priceCategory"
         const val PREFERENCE_PRICE_CATEGORY_ID = "priceCategoryId"
         const val PREFERENCE_BACK_ONLINE = "backOnline"
     }

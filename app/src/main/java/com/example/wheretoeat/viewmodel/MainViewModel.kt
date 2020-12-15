@@ -38,7 +38,7 @@ class MainViewModel @ViewModelInject constructor(
             repository.local.insertFavoriteRestaurant(favoritesEntity)
         }
 
-    private fun deleteFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
+    fun deleteFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.deleteFavoriteRestaurant(favoritesEntity)
         }

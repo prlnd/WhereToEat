@@ -21,6 +21,7 @@ class RestaurantsBottomSheet : BottomSheetDialogFragment() {
     private lateinit var restaurantsViewModel: RestaurantsViewModel
 
     private var priceCategoryChip = DEFAULT_PRICE
+    private var priceCategoryChipId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +37,20 @@ class RestaurantsBottomSheet : BottomSheetDialogFragment() {
         val mView = inflater.inflate(R.layout.restaurants_bottom_sheet, container, false)
 
         restaurantsViewModel.readPriceCategory.asLiveData().observe(viewLifecycleOwner, { value ->
-            priceCategoryChip = value
-            updateChip(value, mView.price_chipGroup)
+            priceCategoryChip = value.selectedPriceCategory
+            priceCategoryChipId = value.selectedPriceCategoryId
+            updateChip(value.selectedPriceCategoryId, mView.price_chipGroup)
         })
 
-        mView.price_chipGroup.setOnCheckedChangeListener { _, selectedChipId ->
-            val selectedPriceCategory = selectedChipId
+        mView.price_chipGroup.setOnCheckedChangeListener { group, selectedChipId ->
+            val chip = group.findViewById<Chip>(selectedChipId)
+            val selectedPriceCategory = chip.text.toString().toInt()
             priceCategoryChip = selectedPriceCategory
+            priceCategoryChipId = selectedChipId
         }
 
         mView.apply_button.setOnClickListener {
-            restaurantsViewModel.savePriceCategory(priceCategoryChip)
+            restaurantsViewModel.savePriceCategory(priceCategoryChip, priceCategoryChipId)
             val action =
                 RestaurantsBottomSheetDirections.actionRestaurantsBottomSheetToRestaurantsFragment(
                     true

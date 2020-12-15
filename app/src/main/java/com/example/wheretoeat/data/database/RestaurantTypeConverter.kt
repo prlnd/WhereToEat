@@ -24,7 +24,7 @@ class RestaurantTypeConverter {
 
     @TypeConverter
     fun stringToRestaurant(data: String): Restaurant {
-        val listType = object : TypeToken<RestaurantList>() {}.type
+        val listType = object : TypeToken<Restaurant>() {}.type
         return gson.fromJson(data, listType)
     }
 }

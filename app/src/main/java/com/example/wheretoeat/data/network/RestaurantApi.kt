@@ -12,7 +12,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface RestaurantApi {
-    @GET("api/restaurants")
+
+    @GET("/restaurants")
     suspend fun getRestaurants(
         @Query(QUERY_CITY) city: String,
         @Query(QUERY_PRICE) price: Int? = null,
@@ -20,15 +21,9 @@ interface RestaurantApi {
         @Query(QUERY_PER_PAGE) per_page: Int? = null
         ): Response<RestaurantList>
 
-    @GET("api/cities")
+    @GET("/cities")
     suspend fun getCities(): Response<CityList>
 
-    @GET("api/countries")
+    @GET("/countries")
     suspend fun getCountries(): Response<CountryList>
 }
-
-//object Api {
-//    val api: RestaurantApi by lazy {
-//        retrofit.create(RestaurantApi::class.java)
-//    }
-//}

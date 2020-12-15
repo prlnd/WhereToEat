@@ -27,9 +27,9 @@ class RestaurantsViewModel @ViewModelInject constructor(
     val readPriceCategory = dataStoreRepository.readPriceCategory
     val readBackOnline = dataStoreRepository.readBackOnline.asLiveData()
 
-    fun savePriceCategory(priceCategoryId: Int) =
+    fun savePriceCategory(priceCategory: Int, priceCategoryId: Int) =
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.savePriceCategory(priceCategoryId)
+            dataStoreRepository.savePriceCategory(priceCategory, priceCategoryId)
         }
 
     fun saveBackOnline(backOnline: Boolean) =
@@ -39,8 +39,8 @@ class RestaurantsViewModel @ViewModelInject constructor(
 
     fun applyQueries(): QueryParameters {
         viewModelScope.launch {
-            readPriceCategory.collect {
-                priceCategory = it + 1
+            readPriceCategory.collect { value ->
+                priceCategory = value.selectedPriceCategory
             }
         }
 
@@ -54,7 +54,7 @@ class RestaurantsViewModel @ViewModelInject constructor(
         if (!networkStatus) {
             Toast.makeText(getApplication(), "No Internet Connection.", Toast.LENGTH_SHORT).show()
             saveBackOnline(true)
-        } else if (networkStatus && backOnline) {
+        } else if (backOnline) {
             Toast.makeText(getApplication(), "We are back online.", Toast.LENGTH_SHORT).show()
             saveBackOnline(false)
 

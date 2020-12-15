@@ -60,7 +60,7 @@ class RestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
             restaurantsViewModel.backOnline = it
         })
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checkNetworkAvailability(requireContext())
                 .collect { status ->
