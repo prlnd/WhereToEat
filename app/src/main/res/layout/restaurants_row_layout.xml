@@ -28,7 +28,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/light_medium_gray"
+            app:strokeColor="@color/lightMediumGray"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.47" />
+                    app:layout_constraintGuide_percent="0.5" />
 
                 <!--loadImageFromUrl="@{restaurant.imageUrl}"-->
                 <ImageView
@@ -76,7 +76,7 @@
 
                 <ImageView
                     android:id="@+id/address_imageView"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="@+id/address_linearLayout"
@@ -116,7 +116,7 @@
                 <ImageView
                     android:id="@+id/price_imageView"
                     setPrice="@{restaurant.price}"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/price_textView"
                     app:layout_constraintStart_toStartOf="@+id/address_imageView"
@@ -138,7 +138,7 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/price_imageView"

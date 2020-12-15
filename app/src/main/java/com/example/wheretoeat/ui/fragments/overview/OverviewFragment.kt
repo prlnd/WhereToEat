@@ -27,9 +27,9 @@ class OverviewFragment : Fragment() {
         val args = arguments
         val myBundle: Restaurant? = args?.getParcelable("restaurantBundle")
 
-        Glide.with(view.main_imageView.context)
-            .load(myBundle?.imageUrl)
-            .into(view.main_imageView)
+//        Glide.with(view.main_imageView.context)
+//            .load(myBundle?.imageUrl)
+//            .into(view.main_imageView)
         view.titleDetails_textView.text = myBundle?.name
         view.money_textView.text = myBundle?.price.toString()
         view.addressDetail_textView.text =

@@ -8,12 +8,16 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.NavArgs
 import androidx.navigation.findNavController
+import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.wheretoeat.R
 import com.example.wheretoeat.model.Restaurant
+import com.example.wheretoeat.ui.DetailsActivityArgs
+import com.example.wheretoeat.ui.MainActivity
 import com.example.wheretoeat.ui.fragments.restaurants.RestaurantsFragmentDirections
 import java.lang.Exception
 

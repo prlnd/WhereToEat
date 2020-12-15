@@ -9,14 +9,14 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Custom Colors -->
-    <color name="color_primary">#6200EA</color>
-    <color name="color_primary_dark">#5502C8</color>
-    <color name="color_accent">#9D46FF</color>
+    <color name="colorPrimary">#6200EA</color>
+    <color name="colorPrimaryDark">#5502C8</color>
+    <color name="colorAccent">#9D46FF</color>
 
-    <color name="light_gray">#F9F9F9</color>
-    <color name="medium_gray">#D1D1D1</color>
-    <color name="light_medium_gray">#80D1D1D1</color>
-    <color name="dark_gray">#4B4B4B</color>
+    <color name="lightGray">#F9F9F9</color>
+    <color name="mediumGray">#D1D1D1</color>
+    <color name="lightMediumGray">#80D1D1D1</color>
+    <color name="darkGray">#4B4B4B</color>
     <color name="dark">#313C44</color>
     <color name="darker">#151B20</color>
     <color name="red">#FF4646</color>
@@ -26,9 +26,17 @@
 
     <!-- Custom Chip Style -->
     <color name="checkedChipBackgroundColor">#206200EA</color>
-    <color name="chipBackgroundColor">@color/light_gray</color>
-    <color name="checkedChipTextColor">@color/color_primary</color>
-    <color name="chipTextColor">@color/dark_gray</color>
+    <color name="chipBackgroundColor">@color/lightGray</color>
+    <color name="checkedChipTextColor">@color/colorPrimary</color>
+    <color name="chipTextColor">@color/darkGray</color>
 
-    <color name="actionBarBackgroundColor">@color/color_primary</color>
+    <color name="actionBarBackgroundColor">@color/colorPrimary</color>
+    <color name="strokeColor">@color/lightMediumGray</color>
+    <color name="cardBackgroundColor">@color/white</color>
+    <color name="cardBackgroundLightColor">#106200EA</color>
+    <color name="titleColor">@color/darker</color>
+
+    <color name="statusBarColor">@color/colorPrimaryDark</color>
+    <color name="contextualStatusBarColor">@color/darker</color>
+    <color name="contextualActionBarColor">@color/dark</color>
 </resources>

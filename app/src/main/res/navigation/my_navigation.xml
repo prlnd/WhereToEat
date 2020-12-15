@@ -25,7 +25,11 @@
         android:id="@+id/favoriteRestaurantsFragment"
         android:name="com.example.wheretoeat.ui.fragments.favorites.FavoriteRestaurantsFragment"
         android:label="Favorites"
-        tools:layout="@layout/fragment_favorite_restaurants" />
+        tools:layout="@layout/fragment_favorite_restaurants" >
+        <action
+            android:id="@+id/action_favoriteRestaurantsFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.wheretoeat.ui.fragments.profile.ProfileFragment"

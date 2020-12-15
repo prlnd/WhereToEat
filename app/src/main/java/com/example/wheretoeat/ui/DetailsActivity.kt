@@ -110,11 +110,8 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(
-            detailsLayout,
-            message,
-            Snackbar.LENGTH_SHORT
-        ).setAction("Okay") {}
+        Snackbar.make(detailsLayout, message, Snackbar.LENGTH_SHORT)
+            .setAction("Okay") {}
             .show()
     }
 

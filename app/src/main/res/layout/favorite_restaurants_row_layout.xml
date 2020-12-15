@@ -10,7 +10,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/restaurantsRowLayout"
+        android:id="@+id/favoriteRestaurantsRowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -26,7 +26,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/light_medium_gray"
+            app:strokeColor="@color/lightMediumGray"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,14 +39,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.47" />
+                    app:layout_constraintGuide_percent="0.5" />
 
+                <!--loadImageFromUrl="@{favoritesEntity.restaurant.imageUrl}"-->
                 <ImageView
                     android:id="@+id/favorite_restaurant_imageView"
-                    loadImageFromUrl="@{favoritesEntity.restaurant.imageUrl}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/foodimage"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/favorite_card_guideline"
                     app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +74,7 @@
 
                 <ImageView
                     android:id="@+id/favorite_address_imageView"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     app:layout_constraintBottom_toBottomOf="@+id/favorite_address_linearLayout"
@@ -113,7 +114,7 @@
                 <ImageView
                     android:id="@+id/favorite_price_imageView"
                     setPrice="@{favoritesEntity.restaurant.price}"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/favorite_price_textView"
                     app:layout_constraintStart_toStartOf="@+id/favorite_address_imageView"
@@ -135,7 +136,7 @@
 
                 <ImageView
                     android:id="@+id/favorite_imageView"
-                    android:layout_width="0dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/favorite_price_imageView"
