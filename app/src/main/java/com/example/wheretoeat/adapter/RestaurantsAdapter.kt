@@ -8,9 +8,11 @@ import com.example.wheretoeat.databinding.RestaurantsRowLayoutBinding
 import com.example.wheretoeat.model.Restaurant
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.RestaurantsDiffUtil
+import java.util.*
 
 class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.MyViewHolder>() {
-    private var restaurants = emptyList<Restaurant>()
+    private var restaurants = mutableListOf<Restaurant>()
+    private var restaurantsCopy = emptyList<Restaurant>()
 
     class MyViewHolder(private val binding: RestaurantsRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -41,9 +43,25 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.MyViewHolder>
     override fun getItemCount() = restaurants.size
 
     fun setData(newData: RestaurantList) {
-        val restaurantsDiffUtil = RestaurantsDiffUtil(restaurants, newData.restaurants)
+        val restaurantsDiffUtil = RestaurantsDiffUtil(restaurantsCopy, newData.restaurants)
         val diffUtilResult = DiffUtil.calculateDiff(restaurantsDiffUtil)
-        restaurants = newData.restaurants.sortedBy { it.name }
+        restaurantsCopy = newData.restaurants
+        restaurants = restaurantsCopy.toMutableList()
         diffUtilResult.dispatchUpdatesTo(this)
+    }
+
+    fun filter(text: String) {
+        restaurants.clear()
+        if (text.isEmpty()) {
+            restaurants.addAll(restaurantsCopy)
+        } else {
+            val textLower = text.toLowerCase(Locale.ROOT)
+            restaurantsCopy.forEach {
+                if (it.name.toLowerCase(Locale.ROOT).contains(textLower)) {
+                    restaurants.add(it)
+                }
+            }
+        }
+        notifyDataSetChanged()
     }
 }

@@ -14,6 +14,7 @@ import com.example.wheretoeat.util.RestaurantsDiffUtil
 import com.example.wheretoeat.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.favorite_restaurants_row_layout.view.*
+import java.util.*
 
 class FavoriteRestaurantsAdapter(
     private val requireActivity: FragmentActivity,
@@ -27,7 +28,8 @@ class FavoriteRestaurantsAdapter(
 
     private val selectedRestaurants = mutableListOf<FavoritesEntity>()
     private val myViewHolders = mutableListOf<MyViewHolder>()
-    private var favoriteRestaurants = emptyList<FavoritesEntity>()
+    private var favoriteRestaurants = mutableListOf<FavoritesEntity>()
+    private var favoriteRestaurantsCopy = emptyList<FavoritesEntity>()
 
     class MyViewHolder(private val binding: FavoriteRestaurantsRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -169,7 +171,8 @@ class FavoriteRestaurantsAdapter(
         val favoriteRestaurantsDiffUtil =
             RestaurantsDiffUtil(favoriteRestaurants, newFavoriteRestaurants)
         val diffUtilResult = DiffUtil.calculateDiff(favoriteRestaurantsDiffUtil)
-        favoriteRestaurants = newFavoriteRestaurants
+        favoriteRestaurantsCopy = newFavoriteRestaurants
+        favoriteRestaurants = favoriteRestaurantsCopy.toMutableList()
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
@@ -183,5 +186,20 @@ class FavoriteRestaurantsAdapter(
         if (this::mActionMode.isInitialized) {
             mActionMode.finish()
         }
+    }
+
+    fun filter(text: String) {
+        favoriteRestaurants.clear()
+        if (text.isEmpty()) {
+            favoriteRestaurants.addAll(favoriteRestaurantsCopy)
+        } else {
+            val textLower = text.toLowerCase(Locale.ROOT)
+            favoriteRestaurantsCopy.forEach {
+                if (it.restaurant.name.toLowerCase(Locale.ROOT).contains(textLower)) {
+                    favoriteRestaurants.add(it)
+                }
+            }
+        }
+        notifyDataSetChanged()
     }
 }

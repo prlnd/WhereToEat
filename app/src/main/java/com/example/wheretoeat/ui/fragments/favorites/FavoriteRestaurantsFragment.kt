@@ -2,6 +2,7 @@ package com.example.wheretoeat.ui.fragments.favorites
 
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,10 +13,9 @@ import com.example.wheretoeat.databinding.FragmentFavoriteRestaurantsBinding
 import com.example.wheretoeat.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_favorite_restaurants.view.*
 
 @AndroidEntryPoint
-class FavoriteRestaurantsFragment : Fragment() {
+class FavoriteRestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private val mainViewModel: MainViewModel by viewModels()
     private val mAdapter: FavoriteRestaurantsAdapter by lazy {
@@ -44,6 +44,25 @@ class FavoriteRestaurantsFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.favorite_restaurants_menu, menu)
+
+        val search = menu.findItem(R.id.favorite_menu_search)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            mAdapter.filter(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText != null) {
+            mAdapter.filter(newText)
+        }
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

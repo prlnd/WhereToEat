@@ -98,10 +98,16 @@ class RestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            mAdapter.filter(query)
+        }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText != null) {
+            mAdapter.filter(newText)
+        }
         return true
     }
 

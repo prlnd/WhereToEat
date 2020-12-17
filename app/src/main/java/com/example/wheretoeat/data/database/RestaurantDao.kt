@@ -15,10 +15,10 @@ interface RestaurantDao {
     suspend fun insertFavoriteRestaurant(favoritesEntity: FavoritesEntity)
 
     // Flow is similar to LiveData
-    @Query("SELECT * FROM restaurants_table ORDER BY id ASC")
+    @Query("SELECT * FROM restaurants_table")
     fun readRestaurants(): Flow<List<RestaurantEntity>>
 
-    @Query("SELECT * FROM favorites_table ORDER BY id ASC")
+    @Query("SELECT * FROM favorites_table")
     fun readFavoriteRestaurants(): Flow<List<FavoritesEntity>>
 
     @Delete
