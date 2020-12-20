@@ -1,9 +1,9 @@
 package com.example.wheretoeat.data
 
 import com.example.wheretoeat.data.database.RestaurantDao
+import com.example.wheretoeat.data.database.entities.CitiesEntity
 import com.example.wheretoeat.data.database.entities.FavoritesEntity
-import com.example.wheretoeat.data.database.entities.RestaurantEntity
-import kotlinx.coroutines.flow.Flow
+import com.example.wheretoeat.data.database.entities.RestaurantsEntity
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
@@ -14,11 +14,16 @@ class LocalDataSource @Inject constructor(
 
     fun readFavoriteRestaurants() = restaurantDao.readFavoriteRestaurants()
 
-    suspend fun insertRestaurants(restaurantEntity: RestaurantEntity) =
-        restaurantDao.insertRestaurant(restaurantEntity)
+    fun readCities() = restaurantDao.readCities()
+
+    suspend fun insertRestaurant(restaurantsEntity: RestaurantsEntity) =
+        restaurantDao.insertRestaurant(restaurantsEntity)
 
     suspend fun insertFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
         restaurantDao.insertFavoriteRestaurant(favoritesEntity)
+
+    suspend fun insertCity(citiesEntity: CitiesEntity) =
+        restaurantDao.insertCity(citiesEntity)
 
     suspend fun deleteFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
         restaurantDao.deleteFavoriteRestaurant(favoritesEntity)

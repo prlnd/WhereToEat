@@ -7,6 +7,7 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -67,7 +68,17 @@ class RestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
                     Log.d("NetworkListener", status.toString())
                     restaurantsViewModel.networkStatus = status
                     restaurantsViewModel.showNetworkStatus()
-                    readDatabase()
+                    if (restaurantsViewModel.cities.value.isEmpty()) {
+                        readCities()
+                        restaurantsViewModel.cities.asLiveData()
+                            .observe(viewLifecycleOwner, { list ->
+                                if (list.isNotEmpty() || !status) {
+                                    readDatabase()
+                                }
+                            })
+                    } else {
+                        readDatabase()
+                    }
                 }
         }
 
@@ -98,24 +109,58 @@ class RestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null) {
-            mAdapter.filter(query)
-        }
+        query?.let { mAdapter.filter(it) }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        if (newText != null) {
-            mAdapter.filter(newText)
-        }
+        newText?.let { mAdapter.filter(it) }
         return true
+    }
+
+    private fun readCities() {
+        lifecycleScope.launch {
+            mainViewModel.readCities.observeOnce(viewLifecycleOwner, { database ->
+                if (database.isNotEmpty()) {
+                    Log.d("RestaurantFragment", "readCities called!")
+                    restaurantsViewModel.cities.value = database[0].cityList.cities
+                } else {
+                    requestCityApiData()
+                }
+            })
+        }
+    }
+
+    private fun requestCityApiData() {
+        Log.d("RestaurantFragment", "requestCityApiData called!")
+        mainViewModel.getCities()
+        mainViewModel.citiesResponse.observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    response.data?.let { restaurantsViewModel.cities.value = it.cities }
+                }
+                is NetworkResult.Error -> {
+                    loadCityDataFromCache()
+                }
+            }
+        })
+    }
+
+    private fun loadCityDataFromCache() {
+        lifecycleScope.launch {
+            mainViewModel.readCities.observe(viewLifecycleOwner, { database ->
+                if (database.isNotEmpty()) {
+                    restaurantsViewModel.cities.value = database[0].cityList.cities
+                }
+            })
+        }
     }
 
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRestaurants.observeOnce(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty() && !args.backFromBottomSheet) {
-                    Log.d("RestaurantFragment", "requestApiData called!")
+                    Log.d("RestaurantFragment", "readDatabase called!")
                     mAdapter.setData(database[0].restaurantList)
                     hideShimmerEffect()
                 } else {
@@ -132,7 +177,6 @@ class RestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    loadDataFromCache()
                     response.data?.let { mAdapter.setData(it) }
                 }
                 is NetworkResult.Error -> {

@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.preferencesKey
 import androidx.datastore.preferences.createDataStore
 import com.example.wheretoeat.util.Constants.Companion.DEFAULT_PRICE
 import com.example.wheretoeat.util.Constants.Companion.PREFERENCE_BACK_ONLINE
+import com.example.wheretoeat.util.Constants.Companion.PREFERENCE_CITY_NAME
 import com.example.wheretoeat.util.Constants.Companion.PREFERENCE_NAME
 import com.example.wheretoeat.util.Constants.Companion.PREFERENCE_PRICE_CATEGORY
 import com.example.wheretoeat.util.Constants.Companion.PREFERENCE_PRICE_CATEGORY_ID
@@ -26,6 +27,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     private object PreferenceKeys {
         val selectedPriceCategory = preferencesKey<Int>(PREFERENCE_PRICE_CATEGORY)
         val selectedPriceCategoryId = preferencesKey<Int>(PREFERENCE_PRICE_CATEGORY_ID)
+        val selectedCityName = preferencesKey<String>(PREFERENCE_CITY_NAME)
         val backOnline = preferencesKey<Boolean>(PREFERENCE_BACK_ONLINE)
     }
 
@@ -37,6 +39,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.selectedPriceCategory] = priceCategory
             preferences[PreferenceKeys.selectedPriceCategoryId] = priceCategoryId
+        }
+    }
+
+    suspend fun saveCityName(cityName: String) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.selectedCityName] = cityName
         }
     }
 
@@ -58,6 +66,19 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             val selectedPriceCategory = preferences[PreferenceKeys.selectedPriceCategory] ?: DEFAULT_PRICE
             val selectedPriceCategoryId = preferences[PreferenceKeys.selectedPriceCategoryId] ?: 0
             PriceCategory(selectedPriceCategory, selectedPriceCategoryId)
+        }
+
+    val readCityName: Flow<String> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            val selectedCityName = preferences[PreferenceKeys.selectedCityName] ?: ""
+            selectedCityName
         }
 
     val readBackOnline: Flow<Boolean> = dataStore.data

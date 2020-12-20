@@ -7,7 +7,7 @@ class SharedViewModel : ViewModel() {
     val favoriteMap = hashMapOf<Int, MutableList<Restaurant>>()
 
     fun addFavorite(userId: Int, rest: Restaurant) {
-        val tmp = favoriteMap.get(userId)
+        val tmp = favoriteMap[userId]
         if (tmp != null) {
             tmp.add(rest)
         } else {

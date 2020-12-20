@@ -1,6 +1,7 @@
 package com.example.wheretoeat.data.database
 
 import androidx.room.TypeConverter
+import com.example.wheretoeat.model.CityList
 import com.example.wheretoeat.model.Restaurant
 import com.example.wheretoeat.model.RestaurantList
 import com.google.gson.Gson
@@ -25,6 +26,15 @@ class RestaurantTypeConverter {
     @TypeConverter
     fun stringToRestaurant(data: String): Restaurant {
         val listType = object : TypeToken<Restaurant>() {}.type
+        return gson.fromJson(data, listType)
+    }
+
+    @TypeConverter
+    fun cityListToString(cityList: CityList): String = gson.toJson(cityList)
+
+    @TypeConverter
+    fun stringToCityList(data: String): CityList {
+        val listType = object : TypeToken<CityList>() {}.type
         return gson.fromJson(data, listType)
     }
 }

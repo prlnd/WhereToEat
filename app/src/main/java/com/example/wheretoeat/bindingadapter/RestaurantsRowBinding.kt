@@ -72,12 +72,7 @@ class RestaurantsRowBinding {
                 }
             )
             when (view) {
-                is TextView -> {
-                    view.apply {
-                        text = "$".repeat(price)
-//                        setTextColor(color)
-                    }
-                }
+                is TextView -> view.text = "$".repeat(price)
                 is ImageView -> view.setColorFilter(color)
             }
         }

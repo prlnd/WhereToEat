@@ -15,7 +15,7 @@ interface RestaurantApi {
 
     @GET("/restaurants")
     suspend fun getRestaurants(
-        @Query(QUERY_CITY) city: String,
+        @Query(QUERY_CITY) city: String?,
         @Query(QUERY_PRICE) price: Int? = null,
         @Query(QUERY_PAGE) page: Int? = null,
         @Query(QUERY_PER_PAGE) per_page: Int? = null

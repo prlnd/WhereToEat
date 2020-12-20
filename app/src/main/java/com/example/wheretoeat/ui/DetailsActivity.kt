@@ -75,14 +75,15 @@ class DetailsActivity : AppCompatActivity() {
     private fun checkSavedRestaurants(menuItem: MenuItem) {
         mainViewModel.readFavoriteRestaurants.observe(this, { favoritesEntity ->
             try {
-                for (savedRestaurant in favoritesEntity) {
-                    if (savedRestaurant.restaurant.id == args.restaurant.id) {
-                        changeMenuItemColor(menuItem, R.color.yellow)
-                        savedRestaurantID = savedRestaurant.id
-                        restaurantSaved = true
-                    } else {
-                        changeMenuItemColor(menuItem, R.color.white)
-                    }
+                val savedRestaurant = favoritesEntity.firstOrNull { savedRestaurant ->
+                    savedRestaurant.restaurant.id == args.restaurant.id
+                }
+                if (savedRestaurant != null) {
+                    changeMenuItemColor(menuItem, R.color.yellow)
+                    savedRestaurantID = savedRestaurant.id
+                    restaurantSaved = true
+                } else {
+                    changeMenuItemColor(menuItem, R.color.white)
                 }
             } catch (e: Exception) {
                 Log.d("DetailsActivity", e.message.toString())

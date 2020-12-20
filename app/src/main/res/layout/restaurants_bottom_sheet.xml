@@ -35,7 +35,6 @@
             android:id="@+id/cityFilter_searchableSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/planets"
             android:spinnerMode="dropdown" />
     </LinearLayout>
 
@@ -81,28 +80,28 @@
                     style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1" />
+                    android:text="@string/_1" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
                     style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2" />
+                    android:text="@string/_2" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip3"
                     style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3" />
+                    android:text="@string/_3" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip4"
                     style="@style/CustomChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4" />
+                    android:text="@string/_4" />
 
             </com.google.android.material.chip.ChipGroup>
         </LinearLayout>

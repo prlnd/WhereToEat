@@ -27,6 +27,10 @@
     <string name="no_favorite_recipes">No Favorite Recipes.</string>
     <string name="delete_favorite_menu">Delete Favorite Menu</string>
     <string name="delete_all">Delete All</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
 
     <string-array name="planets">
         <item>Chicago</item>

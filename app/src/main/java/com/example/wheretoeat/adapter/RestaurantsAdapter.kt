@@ -8,7 +8,6 @@ import com.example.wheretoeat.databinding.RestaurantsRowLayoutBinding
 import com.example.wheretoeat.model.Restaurant
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.RestaurantsDiffUtil
-import java.util.*
 
 class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.MyViewHolder>() {
     private var restaurants = mutableListOf<Restaurant>()
@@ -55,9 +54,8 @@ class RestaurantsAdapter : RecyclerView.Adapter<RestaurantsAdapter.MyViewHolder>
         if (text.isEmpty()) {
             restaurants.addAll(restaurantsCopy)
         } else {
-            val textLower = text.toLowerCase(Locale.ROOT)
             restaurantsCopy.forEach {
-                if (it.name.toLowerCase(Locale.ROOT).contains(textLower)) {
+                if (it.name.contains(text, true)) {
                     restaurants.add(it)
                 }
             }

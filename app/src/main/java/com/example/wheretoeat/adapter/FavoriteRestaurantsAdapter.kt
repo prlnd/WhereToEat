@@ -14,7 +14,6 @@ import com.example.wheretoeat.util.RestaurantsDiffUtil
 import com.example.wheretoeat.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.favorite_restaurants_row_layout.view.*
-import java.util.*
 
 class FavoriteRestaurantsAdapter(
     private val requireActivity: FragmentActivity,
@@ -193,9 +192,8 @@ class FavoriteRestaurantsAdapter(
         if (text.isEmpty()) {
             favoriteRestaurants.addAll(favoriteRestaurantsCopy)
         } else {
-            val textLower = text.toLowerCase(Locale.ROOT)
             favoriteRestaurantsCopy.forEach {
-                if (it.restaurant.name.toLowerCase(Locale.ROOT).contains(textLower)) {
+                if (it.restaurant.name.contains(text, true)) {
                     favoriteRestaurants.add(it)
                 }
             }

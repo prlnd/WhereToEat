@@ -52,7 +52,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/favorite_card_guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    tools:srcCompat="@tools:sample/avatars"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/favorite_title_textView"
@@ -80,7 +81,8 @@
                     app:layout_constraintBottom_toBottomOf="@+id/favorite_address_linearLayout"
                     app:layout_constraintStart_toEndOf="@+id/favorite_restaurant_imageView"
                     app:layout_constraintTop_toTopOf="@+id/favorite_address_linearLayout"
-                    app:srcCompat="@drawable/ic_location" />
+                    app:srcCompat="@drawable/ic_location"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:id="@+id/favorite_address_linearLayout"
@@ -119,7 +121,8 @@
                     app:layout_constraintBottom_toBottomOf="@+id/favorite_price_textView"
                     app:layout_constraintStart_toStartOf="@+id/favorite_address_imageView"
                     app:layout_constraintTop_toTopOf="@+id/favorite_price_textView"
-                    app:srcCompat="@drawable/ic_money" />
+                    app:srcCompat="@drawable/ic_money"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/favorite_price_textView"
@@ -142,7 +145,9 @@
                     app:layout_constraintBottom_toBottomOf="@+id/favorite_price_imageView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/favorite_price_imageView"
-                    app:srcCompat="@drawable/ic_star" />
+                    app:srcCompat="@drawable/ic_star"
+                    tools:ignore="ContentDescription"
+                    app:tint="@color/yellow" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

@@ -7,9 +7,11 @@ import android.net.NetworkCapabilities
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.wheretoeat.data.Repository
+import com.example.wheretoeat.data.database.entities.CitiesEntity
 import com.example.wheretoeat.data.database.entities.FavoritesEntity
 import com.example.wheretoeat.model.QueryParameters
-import com.example.wheretoeat.data.database.entities.RestaurantEntity
+import com.example.wheretoeat.data.database.entities.RestaurantsEntity
+import com.example.wheretoeat.model.CityList
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.NetworkResult
 import kotlinx.coroutines.Dispatchers
@@ -27,15 +29,21 @@ class MainViewModel @ViewModelInject constructor(
 
     val readRestaurants = repository.local.readRestaurants().asLiveData()
     val readFavoriteRestaurants = repository.local.readFavoriteRestaurants().asLiveData()
+    val readCities = repository.local.readCities().asLiveData()
 
-    private fun insertRestaurants(restaurantEntity: RestaurantEntity) =
+    private fun insertRestaurants(restaurantsEntity: RestaurantsEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            repository.local.insertRestaurants(restaurantEntity)
+            repository.local.insertRestaurant(restaurantsEntity)
         }
 
     fun insertFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.local.insertFavoriteRestaurant(favoritesEntity)
+        }
+
+    private fun insertCities(citiesEntity: CitiesEntity) =
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.local.insertCity(citiesEntity)
         }
 
     fun deleteFavoriteRestaurant(favoritesEntity: FavoritesEntity) =
@@ -52,16 +60,15 @@ class MainViewModel @ViewModelInject constructor(
 
     // injecting our repository here
     var restaurantsResponse = MutableLiveData<NetworkResult<RestaurantList>>()
-    // TODO(city list)
-//    var citiesResponse = MutableLiveData<NetworkResult<CityList>>()
+    var citiesResponse = MutableLiveData<NetworkResult<CityList>>()
 
     fun getRestaurants(queries: QueryParameters) = viewModelScope.launch {
         getRestaurantsSafeCall(queries)
     }
 
-//    fun getCities() = viewModelScope.launch {
-//        getCitiesSafeCall()
-//    }
+    fun getCities() = viewModelScope.launch {
+        getCitiesSafeCall()
+    }
 
     private suspend fun getRestaurantsSafeCall(queries: QueryParameters) {
         restaurantsResponse.value = NetworkResult.Loading()
@@ -71,9 +78,7 @@ class MainViewModel @ViewModelInject constructor(
                 restaurantsResponse.value = handleRestaurantListResponse(response)
 
                 val restaurantList = restaurantsResponse.value!!.data
-                if (restaurantList != null) {
-                    offlineCacheRestaurants(restaurantList)
-                }
+                restaurantList?.let { offlineCacheRestaurants(it) }
             } catch (e: Exception) {
                 restaurantsResponse.value = NetworkResult.Error("Restaurants not found.")
             }
@@ -82,24 +87,30 @@ class MainViewModel @ViewModelInject constructor(
         }
     }
 
-//    private suspend fun getCitiesSafeCall() {
-//        citiesResponse.value = NetworkResult.Loading()
-//        if (hasInternetConnection()) {
-//            try {
-//                val response = repository.remote.getRestaurants(queries)
-//                restaurantsResponse.value = handleRestaurantListResponse(response)
-//
-//                val cityList = citiesResponse.value!!.data
-//            } catch (e: Exception) {
-//                citiesResponse.value = NetworkResult.Error("Restaurants not found.")
-//            }
-//        } else {
-//            citiesResponse.value = NetworkResult.Error("No Internet Connection.")
-//        }
-//    }
+    private suspend fun getCitiesSafeCall() {
+        citiesResponse.value = NetworkResult.Loading()
+        if (hasInternetConnection()) {
+            try {
+                val response = repository.remote.getCities()
+                citiesResponse.value = handleCityListResponse(response)
+
+                val cityList = citiesResponse.value!!.data
+                cityList?.let { offlineCacheCities(it) }
+            } catch (e: Exception) {
+                citiesResponse.value = NetworkResult.Error("Cities not found.")
+            }
+        } else {
+            citiesResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
+
+    private fun offlineCacheCities(cityList: CityList) {
+        val cityEntity = CitiesEntity(cityList)
+        insertCities(cityEntity)
+    }
 
     private fun offlineCacheRestaurants(restaurantList: RestaurantList) {
-        val restaurantEntity = RestaurantEntity(restaurantList)
+        val restaurantEntity = RestaurantsEntity(restaurantList)
         insertRestaurants(restaurantEntity)
     }
 
@@ -119,6 +130,24 @@ class MainViewModel @ViewModelInject constructor(
             response.isSuccessful -> {
                 val restaurantList = response.body()
                 NetworkResult.Success(restaurantList!!)
+            }
+            else -> {
+                NetworkResult.Error(response.message())
+            }
+        }
+    }
+
+    private fun handleCityListResponse(response: Response<CityList>): NetworkResult<CityList> {
+        return when {
+            response.message().toString().contains("timeout") -> {
+                NetworkResult.Error("Timeout")
+            }
+            response.body()!!.cities.isNullOrEmpty() -> {
+                NetworkResult.Error("Cities not found.")
+            }
+            response.isSuccessful -> {
+                val cityList = response.body()
+                NetworkResult.Success(cityList!!)
             }
             else -> {
                 NetworkResult.Error(response.message())

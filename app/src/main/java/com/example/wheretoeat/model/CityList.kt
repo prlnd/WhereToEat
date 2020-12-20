@@ -1,5 +1,8 @@
 package com.example.wheretoeat.model
 
+import com.google.gson.annotations.SerializedName
+
 data class CityList(
-    val cities:ArrayList<String>
+    @SerializedName("cities")
+    val cities: List<String>
 )

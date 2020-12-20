@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.wheretoeat.data.database.entities.RestaurantEntity
+import com.example.wheretoeat.data.database.entities.RestaurantsEntity
 import com.example.wheretoeat.model.RestaurantList
 import com.example.wheretoeat.util.NetworkResult
 
@@ -17,7 +17,7 @@ class RestaurantsBinding {
         fun errorImageViewVisibility(
             imageView: ImageView,
             apiResponse: NetworkResult<RestaurantList>?,
-            database: List<RestaurantEntity>?
+            database: List<RestaurantsEntity>?
         ) {
             if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                 imageView.visibility = View.VISIBLE
@@ -31,7 +31,7 @@ class RestaurantsBinding {
         fun errorTextViewVisibility(
             textView: TextView,
             apiResponse: NetworkResult<RestaurantList>?,
-            database: List<RestaurantEntity>?
+            database: List<RestaurantsEntity>?
         ) {
             if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                 textView.visibility = View.VISIBLE

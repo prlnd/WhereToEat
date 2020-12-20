@@ -52,16 +52,12 @@ class FavoriteRestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null) {
-            mAdapter.filter(query)
-        }
+        query?.let { mAdapter.filter(it) }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        if (newText != null) {
-            mAdapter.filter(newText)
-        }
+        newText?.let { mAdapter.filter(it) }
         return true
     }
 

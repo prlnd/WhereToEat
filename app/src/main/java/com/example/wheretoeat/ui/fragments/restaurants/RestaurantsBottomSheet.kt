@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
@@ -20,13 +22,15 @@ class RestaurantsBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var restaurantsViewModel: RestaurantsViewModel
 
+    private var cityName = ""
+
     private var priceCategoryChip = DEFAULT_PRICE
     private var priceCategoryChipId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        restaurantsViewModel =
-            ViewModelProvider(requireActivity()).get(RestaurantsViewModel::class.java)
+        val viewModelProvider = ViewModelProvider(requireActivity())
+        restaurantsViewModel = viewModelProvider.get(RestaurantsViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -35,7 +39,59 @@ class RestaurantsBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         val mView = inflater.inflate(R.layout.restaurants_bottom_sheet, container, false)
+        setupSpinner(mView)
+        setupChip(mView)
+        mView.apply_button.setOnClickListener {
+            restaurantsViewModel.apply {
+                savePriceCategory(priceCategoryChip, priceCategoryChipId)
+                saveCityName(cityName)
+            }
+            val action =
+                RestaurantsBottomSheetDirections.actionRestaurantsBottomSheetToRestaurantsFragment(
+                    true
+                )
+            findNavController().navigate(action)
+        }
+        return mView
+    }
 
+    private fun setupSpinner(mView: View) {
+        val spinner = mView.cityFilter_searchableSpinner
+        val cities = restaurantsViewModel.cities
+
+        spinner.adapter = activity?.let {
+            ArrayAdapter(
+                it,
+                android.R.layout.simple_spinner_item,
+                cities.value
+            )
+        }
+
+        restaurantsViewModel.readCityName.asLiveData().observe(viewLifecycleOwner, { value ->
+            cityName = value
+            val position = cities.value.indexOf(cityName)
+            if (position >= 0) {
+                spinner.setSelection(position)
+            }
+        })
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                cityName = parent?.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+        }
+    }
+
+    private fun setupChip(mView: View) {
         restaurantsViewModel.readPriceCategory.asLiveData().observe(viewLifecycleOwner, { value ->
             priceCategoryChip = value.selectedPriceCategory
             priceCategoryChipId = value.selectedPriceCategoryId
@@ -48,17 +104,6 @@ class RestaurantsBottomSheet : BottomSheetDialogFragment() {
             priceCategoryChip = selectedPriceCategory
             priceCategoryChipId = selectedChipId
         }
-
-        mView.apply_button.setOnClickListener {
-            restaurantsViewModel.savePriceCategory(priceCategoryChip, priceCategoryChipId)
-            val action =
-                RestaurantsBottomSheetDirections.actionRestaurantsBottomSheetToRestaurantsFragment(
-                    true
-                )
-            findNavController().navigate(action)
-        }
-
-        return mView
     }
 
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
