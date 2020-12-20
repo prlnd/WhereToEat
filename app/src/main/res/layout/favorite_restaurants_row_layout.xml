@@ -41,13 +41,12 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent="0.5" />
 
-                <!--loadImageFromUrl="@{favoritesEntity.restaurant.imageUrl}"-->
                 <ImageView
                     android:id="@+id/favorite_restaurant_imageView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/foodimage"
+                    loadImageFromUrl="@{favoritesEntity.restaurant.imageUrl}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/favorite_card_guideline"
                     app:layout_constraintStart_toStartOf="parent"

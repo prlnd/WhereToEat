@@ -7,12 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.wheretoeat.R
-import com.example.wheretoeat.bindingadapter.RestaurantsRowBinding.Companion.setPrice
 import com.example.wheretoeat.model.Restaurant
-import kotlinx.android.synthetic.main.fragment_overview.*
 import kotlinx.android.synthetic.main.fragment_overview.view.*
 
 class OverviewFragment : Fragment() {
@@ -27,9 +23,10 @@ class OverviewFragment : Fragment() {
         val args = arguments
         val myBundle: Restaurant? = args?.getParcelable("restaurantBundle")
 
-//        Glide.with(view.main_imageView.context)
-//            .load(myBundle?.imageUrl)
-//            .into(view.main_imageView)
+        Glide.with(view.main_imageView.context)
+            .load(myBundle?.imageUrl)
+            .into(view.main_imageView)
+
         view.titleDetails_textView.text = myBundle?.name
         view.money_textView.text = myBundle?.price.toString()
         view.addressDetail_textView.text =

@@ -10,5 +10,5 @@ data class RestaurantList(
     @SerializedName("per_page")
     val perPage:Int,
     @SerializedName("restaurants")
-    val restaurants: List<Restaurant>
+    val restaurants: MutableList<Restaurant>
 )

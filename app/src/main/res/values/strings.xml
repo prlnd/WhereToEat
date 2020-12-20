@@ -10,11 +10,9 @@
     <string name="text_price">Price</string>
     <string name="textview_splash">Splash Placeholder</string>
     <string name="text_address">Address</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="text_detail_name">Name</string>
     <string name="text_detail_address">Address</string>
     <string name="text_detail_number">Phone Number</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="restaurants_fragment">Restaurants</string>
     <string name="favorite_restaurants_fragment">Favorites</string>
@@ -29,6 +27,7 @@
     <string name="delete_all">Delete All</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
+    <string name="call">Call</string>
     <string name="_3">3</string>
     <string name="_4">4</string>
 

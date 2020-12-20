@@ -26,10 +26,10 @@ data class Restaurant(
     val country: String,
     @SerializedName("phone")
     val phone: String,
-//    @SerializedName("lat")
-//    val lat: Double,
-//    @SerializedName("lng")
-//    val lng: Double,
+    @SerializedName("lat")
+    val lat: Double,
+    @SerializedName("lng")
+    val lng: Double,
     @SerializedName("price")
     val price: Int,
     @SerializedName("reserve_url")

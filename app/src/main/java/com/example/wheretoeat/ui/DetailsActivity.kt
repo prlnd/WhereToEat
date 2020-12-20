@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.wheretoeat.R
 import com.example.wheretoeat.adapter.PagerAdapter
 import com.example.wheretoeat.data.database.entities.FavoritesEntity
+import com.example.wheretoeat.ui.fragments.map.MapsFragment
 import com.example.wheretoeat.ui.fragments.overview.OverviewFragment
 import com.example.wheretoeat.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -37,9 +36,9 @@ class DetailsActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val fragments = mutableListOf<Fragment>(OverviewFragment())
+        val fragments = mutableListOf(OverviewFragment(), MapsFragment())
 
-        val titles = mutableListOf("Overview")
+        val titles = mutableListOf("Overview", "Google Maps")
 
         val restaurantBundle = Bundle()
         restaurantBundle.putParcelable("restaurantBundle", args.restaurant)
