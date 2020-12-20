@@ -1,15 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGray"
     tools:context=".ui.fragments.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <View
+        android:id="@+id/gradient_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:background="@drawable/gradient_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_person"
+        app:layout_constraintBottom_toBottomOf="@+id/gradient_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gradient_profile"
+        app:tint="@color/darkMediumGray" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/nameProfile_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_imageView" />
+
+    <TextView
+        android:id="@+id/addressProfile_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Address"
+        app:layout_constraintEnd_toEndOf="@+id/nameProfile_textView"
+        app:layout_constraintStart_toStartOf="@+id/nameProfile_textView"
+        app:layout_constraintTop_toBottomOf="@+id/nameProfile_textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Phone number"
+        app:layout_constraintEnd_toEndOf="@+id/addressProfile_textView"
+        app:layout_constraintStart_toStartOf="@+id/addressProfile_textView"
+        app:layout_constraintTop_toBottomOf="@+id/addressProfile_textView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Manage"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

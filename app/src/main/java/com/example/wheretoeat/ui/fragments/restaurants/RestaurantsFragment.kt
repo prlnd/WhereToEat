@@ -21,6 +21,7 @@ import com.example.wheretoeat.util.NetworkResult
 import com.example.wheretoeat.util.observeOnce
 import com.example.wheretoeat.viewmodel.RestaurantsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -72,7 +73,7 @@ class RestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
                         readCities()
                         restaurantsViewModel.cities.asLiveData()
                             .observe(viewLifecycleOwner, { list ->
-                                if (list.isNotEmpty() || !status) {
+                                if (list.isNotEmpty()) {
                                     readDatabase()
                                 }
                             })
@@ -140,6 +141,9 @@ class RestaurantsFragment : Fragment(), SearchView.OnQueryTextListener {
                     response.data?.let { restaurantsViewModel.cities.value = it.cities }
                 }
                 is NetworkResult.Error -> {
+                    if (restaurantsViewModel.cities.value.isEmpty()) {
+                        readDatabase()
+                    }
                     loadCityDataFromCache()
                 }
             }

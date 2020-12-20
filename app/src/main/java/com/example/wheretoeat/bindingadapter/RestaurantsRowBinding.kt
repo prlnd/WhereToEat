@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.wheretoeat.R
 import com.example.wheretoeat.model.Restaurant
@@ -45,7 +44,6 @@ class RestaurantsRowBinding {
         fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
             Glide.with(imageView.context)
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.ic_error_placeholder)
                 .transition(
                     DrawableTransitionOptions()

@@ -59,9 +59,9 @@ class RestaurantsViewModel @ViewModelInject constructor(
             }
         }
 
-            if (cityName.isNullOrEmpty() && cities.value.isNotEmpty()) {
-                cityName = cities.value[0]
-            }
+        if (cityName.isNullOrEmpty() && cities.value.isNotEmpty()) {
+            cityName = cities.value[0]
+        }
 
 
         return QueryParameters(

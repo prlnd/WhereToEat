@@ -25,6 +25,7 @@ class OverviewFragment : Fragment() {
 
         Glide.with(view.main_imageView.context)
             .load(myBundle?.imageUrl)
+            .error(R.drawable.ic_error_placeholder)
             .into(view.main_imageView)
 
         view.titleDetails_textView.text = myBundle?.name
