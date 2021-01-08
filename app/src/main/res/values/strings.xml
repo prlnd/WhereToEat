@@ -30,6 +30,7 @@
     <string name="call">Call</string>
     <string name="_3">3</string>
     <string name="_4">4</string>
+    <string name="page">Page</string>
 
     <string-array name="planets">
         <item>Chicago</item>
